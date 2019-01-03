@@ -1,0 +1,15 @@
+1. 모듈제작을 할때...
+  - 모듈 해더([추가한 모듈이름].h)에 IModuleInterface를 상속받은 클래스를 정의(정의시 언리얼 네임 규칙에 의해 FXXXX로시작)
+  - 필요시 IModuleInterface의 가상함수 정의
+
+2. [모듈].cpp에 모듈등록을 알려줘야하는데 메인 게임 모듈의 경우 IMPLEMENT_PRIMARY_GAME_MODULE 로 정의된다.
+   하지만 서브 모듈의 경우 IMPLEMENT_MODULE 로 정의하면 된다.
+
+3. IModuleInterface를::StartupModule() 함수는 모듈이 시작될때 호출되는 함수로 해당 프로젝트는 디테일 커스터마이제이션이기때문에
+   FModuleManager::GetModuleChecked 함수를 이용해서 PropertyEditor 모듈을 가져온다.
+
+4. 이후 가져온 PropertyEditor 모듈에 사용할 디테일페널 커스텀 클래스(여기선 FDamageTableCustomization을 등록시켜준다.)
+   FPropertyEditorModule::RegisterCustomPropertyTypeLayout()함수를 사용하면되는 이때 인자 1에는 커스터마이징할 구조체/클래스의 이름이 들어가야한다!!!
+   (다르면 적용되지 않음. 예를들어 FXYZ라는 구조체를 만들었으면 인자1은"XYZ"가 되는식)
+
+5. 이후 모듈 종료시 IModuleInterface::ShutdownModule() 함수가 호출되는데 이때 다시 PropertyEditor 모듈을 가져와 등록한 클래스를 제거

@@ -1,0 +1,21 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{76AA704E-4765-944A-B054-CBBBD5C6B8ED}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "DetailCustomization",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "DetailPanelEditor",
+			"Type": "Editor",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"CoreUObject"
+			]
+		}
+	]
+}
